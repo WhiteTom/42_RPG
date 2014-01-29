@@ -66,7 +66,7 @@ struct s_skill
 	int		dmg;
 	int		mdmg:
 	int		cost;
-}
+};
 
 struct s_skillslist
 {
@@ -78,7 +78,7 @@ struct s_skillslist
 	t_sk	*sk6;
 	t_sk	*sk7;
 	t_sk	*sk8;
-}
+};
 
 t_sh		*init_thor(t_sh *sh);
 t_sh		*init_sylv(t_sh *sh);
