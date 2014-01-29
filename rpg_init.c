@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "h.h"
-
+/*
 void		init_toons(void)
 {
 	t_sheet		*p1;
@@ -22,3 +22,4 @@ void		init_toons(void)
 	init_thor(p1);
 	init_sylv(p2);
 }
+*/
