@@ -1,8 +1,9 @@
-
 #include "h.h"
 
 t_sh	*fill_sec(t_sh *sh)
 {
+	sh->s = malloc(sizeof(t_s));
+	sh->stat = malloc(sizeof(t_stat));
 	sh->s->hpm  = 200 + (20 * sh->p->cons);
 	sh->s->hp   = sh->s->hpm;
 	sh->s->apm  = 300;
