@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <strings.h>
+#include <time.h>
 /*#include "libft.h"*/
 
 #define BUFF_SIZE 256
@@ -17,7 +18,7 @@ typedef struct s_toonskslot	t_skslot;
 typedef struct s_skill		t_sk;
 typedef struct s_skillslist	t_sklist;
 
-struct	s_prim
+struct	s_prim // Stats Principales
 {
 	char	*name;
 	int	cons;
@@ -27,7 +28,7 @@ struct	s_prim
 	int	luck;
 };
 
-struct	s_sec
+struct	s_sec // Stats Secondaires
 {
 	int	hpm;
 	int	apm;
@@ -39,20 +40,20 @@ struct	s_sec
 	int	mdef;
 };
 
-struct	s_sheet
+struct	s_sheet // Feuille de perso principale
 {
-	t_p 	*p;
-	t_s 	*s;
-	t_stat 	*stat;
-	t_skill	*skill;
+	t_p 		*p;
+	t_s 		*s;
+	t_stat 		*stat;
+	t_skslot	*skill;
 };
 
-struct	s_state
+struct	s_state // Etats des persos
 {
 	int		crit;
 };
 
-struct s_toonskslot
+struct 	s_toonskslot // Slots pour les 4 skills de chaque perso
 {
 	t_sk	*skA;
 	t_sk	*skB;
@@ -60,15 +61,15 @@ struct s_toonskslot
 	t_sk	*skD;
 };
 
-struct s_skill
+struct 	s_skill // Detail des skills
 {
 	char	*name;
 	int		dmg;
-	int		mdmg:
+	int		mdmg;
 	int		cost;
 };
 
-struct s_skillslist
+struct 	s_skillslist // Liste de stockage des skills
 {
 	t_sk	*sk1;
 	t_sk	*sk2;
@@ -80,8 +81,8 @@ struct s_skillslist
 	t_sk	*sk8;
 };
 
-t_sh		*init_thor(t_sh *sh);
-t_sh		*init_sylv(t_sh *sh);
+t_sh		*init_thor(t_sh *sh, t_sklist *sklist);
+t_sh		*init_sylv(t_sh *sh, t_sklist *sklist);
 t_sh		*fill_sec(t_sh *sh);
 int			matk_dmg(t_sh *atkr, t_sh *defr, int base);
 int			atk_dmg(t_sh *atkr, t_sh *defr, int base);
@@ -93,3 +94,5 @@ void		ft_putstr(char *str);
 void		ft_putchar(char c);
 void		ft_putnbr(int n);
 char		*ft_strdup(const char *s1);
+void		fill_sklist(t_sklist **sklist);
+t_sh		*fill_skills(t_sh *sh, int p, t_sklist *sklist);
