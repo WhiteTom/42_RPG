@@ -48,8 +48,8 @@ int			crit_test(int crit)
 {
 	int		r;
 
+	srand(time(NULL));
 	r = (rand() % 100) + 1;
-	ft_putnbr(r);
 	if (crit > r)
 		return (1);
 	return (0);
@@ -63,7 +63,7 @@ int			atk_dmg(t_sh *atkr, t_sh *defr, int base)
 	(*atkr->stat).crit = 0;
 	dmg = (base + (3 * (atkr->p->stre)));
 	red = defr->s->def;
-	if (crit_test((*atkr->stat).crit) == 1)
+	if (crit_test((*atkr->s).crt) == 1)
 	{
 		dmg = dmg * 2;
 		atkr->stat->crit = 1;
@@ -85,11 +85,14 @@ int			main(void)
 {
 	t_sh		*p1;
 	t_sh		*p2;
+	t_sklist	*sklist;
 
+	sklist = malloc(sizeof(sklist));
+	fill_sklist(&sklist);
 	p1 = malloc(sizeof(t_sh));
 	p2 = malloc(sizeof(t_sh));
-	p1 = init_thor(p1);
-	p2 = init_sylv(p2);
+	p1 = init_thor(p1, sklist);
+	p2 = init_sylv(p2, sklist);
 	ft_putstr("It's ");
 	ft_putstr(p1->p->name);
 	ft_putstr("'s turn\n");
