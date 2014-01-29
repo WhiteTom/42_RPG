@@ -1,11 +1,5 @@
 
-SRC		+=
-SRC		+=
-SRC		+=
-SRC		+=
-SRC		+=
-SRC		+=
-SRC		+=
+SRC		+= *.c
 
 NAME	= coucou
 
@@ -15,16 +9,16 @@ CFLAG	= -Wall -Wextra -Werror
 
 OBJ		= $(SRC:.c=.o)
 
-LIB		= ./
+DIR		= ./
 
 all: $(NAME)
 	@echo "--  All   done  --"
 
-$NAME: $(OBJ)
+$(NAME): $(OBJ)
 	$(CC) $(OBJ) -o $(NAME)
 
 %o: %c
-	$(CC) $(CFLAG) $(SRC) -I $(LIB) -L $(LIB) <$ -o @$
+	$(CC) $(CFLAG) -c -I $(DIR) $< -o $@
 
 clean:
 	@rm -f $(OBJ)
