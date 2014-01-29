@@ -15,9 +15,9 @@ typedef struct	s_prim
 	int	inte = 0;
 	int	agil = 0;
 	int	luck = 0;
-}		t_prim;
+}		t_p;
 
-typedef	struct	s_sec
+typedef struct	s_sec
 {
 	int	hpm;
 	int	apm;
@@ -27,10 +27,10 @@ typedef	struct	s_sec
 	int	crt;
 	int	def;
 	int	mdef;
-}		t_sec;
+}		t_s;
 
 typedef struct	s_sheet
 {
-	t_prim prim;
-	t_sec	sec;
-}		t_sheet;
+	t_p p;
+	t_s s;
+}		t_sh;
