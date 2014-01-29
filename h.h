@@ -9,6 +9,7 @@
 
 typedef struct	s_prim
 {
+	char	*name;
 	int	cons = 0;
 	int	stre = 0;
 	int	inte = 0;
@@ -18,20 +19,18 @@ typedef struct	s_prim
 
 typedef	struct	s_sec
 {
-	int	hpmax;
-	int	apmax;
+	int	hpm;
+	int	apm;
 	int	hp;
 	int	ap;
-	int	dodge;
-	int	crit;
-	int	atk;
+	int	ddg;
+	int	crt;
 	int	def;
-	int	matk;
 	int	mdef;
 }		t_sec;
 
 typedef struct	s_sheet
-{	
+{
 	t_prim prim;
 	t_sec	sec;
 }		t_sheet;
