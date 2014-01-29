@@ -1,5 +1,18 @@
 
-void		attack_turn(t_sheet *atkr, t_sheet *defr)
+void		attack_text(t_sh *atkr, t_sh *defr, int hit, int crit)
+{
+	ft_putstr(atkr->p->name);
+	ft_putstr(" has hit ");
+	ft_putstr(defr->p->name);
+	ft_putstr(" and dealt ");
+	ft_putnbr(hit);
+	ft_putstr(" damage");
+	if (crit == 1)
+		ft_putstr(" (Critical hit !)")
+	ft_putchar('\n');
+}
+
+void		attack_turn(t_sh *atkr, t_sh *defr)
 {
 	int		dmg[2];
 	int		hit;
@@ -21,16 +34,16 @@ int			crit_test(int crit)
 	return (0);
 }
 
-int			atk_dmg(t_sheet *atkr, t_sheet *defr, int base, int *iscrit)
+int			atk_dmg(t_sh *atkr, t_sh *defr, int base, int *iscrit)
 {
 	unsigned int	dmg;
 	unsigned int	red;
 	unsigned int	final;
 
 	iscrit = 0;
-	dmg = (base + (3 * (atkr->prim->stre)));
-	red = defr->sec->def;
-	if (crit_test(atkr->sec->crit) == 1)
+	dmg = (base + (3 * (atkr->p->stre)));
+	red = defr->s->def;
+	if (crit_test(atkr->s->crit) == 1)
 	{
 		dmg = dmg * 2;
 		iscrit = 1;
@@ -40,14 +53,14 @@ int			atk_dmg(t_sheet *atkr, t_sheet *defr, int base, int *iscrit)
 	return (final);
 }
 
-int			matk_dmg(t_sheet *atkr, t_sheet *defr, int base)
+int			matk_dmg(t_sh *atkr, t_sh *defr, int base)
 {
 	unsigned int	dmg;
 	unsigned int	red;
 	unsigned int	final;
 
-	dmg = (base + (5 * (atkr->prim->intel)));
-	red = defr->sec->mdef;
+	dmg = (base + (5 * (atkr->p->intel)));
+	red = defr->s->mdef;
 	final = dmg - red;
 	return (final);
 }
