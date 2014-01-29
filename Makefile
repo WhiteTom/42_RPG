@@ -10,7 +10,7 @@ NAME	= coucou
 
 CC		= gcc
 
-CFLAG	= -Wall -Wextra -Werror
+CFLAG	= -Wall -Wextra -Werror -g
 
 OBJ		= $(SRC:.c=.o)
 
