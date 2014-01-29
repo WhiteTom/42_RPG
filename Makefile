@@ -1,5 +1,10 @@
 
-SRC		+= *.c
+SRC		+= fill_sec.c
+SRC		+= skill_list.c
+SRC		+= battle_system.c
+SRC		+= libft_func.c
+SRC		+= thor.c
+SRC		+= sylvain.c
 
 NAME	= coucou
 
@@ -15,7 +20,7 @@ all: $(NAME)
 	@echo "--  All   done  --"
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME)
+	$(CC) $(OBJ) -I $(DIR) -o $(NAME)
 
 %o: %c
 	$(CC) $(CFLAG) -c -I $(DIR) $< -o $@
