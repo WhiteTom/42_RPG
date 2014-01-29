@@ -20,10 +20,10 @@ all: $(NAME)
 	@echo "--  All   done  --"
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -I $(DIR) -o $(NAME)
+	@$(CC) $(OBJ) -I $(DIR) -o $(NAME)
 
 %o: %c
-	$(CC) $(CFLAG) -c -I $(DIR) $< -o $@
+	@$(cc) $(CFLAG) -c -I $(DIR) $< -o $@
 
 clean:
 	@rm -f $(OBJ)
