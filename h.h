@@ -59,7 +59,7 @@ struct 	s_toonskslot // Slots pour les 4 skills de chaque perso
 	t_sk	*skB;
 	t_sk	*skC;
 	t_sk	*skD;
-};
+}; 		// t_skslot
 
 struct 	s_skill // Detail des skills
 {
@@ -87,7 +87,7 @@ t_sh		*fill_sec(t_sh *sh);
 int			matk_dmg(t_sh *atkr, t_sh *defr, int base);
 int			atk_dmg(t_sh *atkr, t_sh *defr, int base);
 int			crit_test(int crit);
-void		attack_turn(t_sh *atkr, t_sh *defr);
+void		attack_turn(t_sh **atkr, t_sh **defr);
 void		attack_text(t_sh *atkr, t_sh *defr, int hit);
 int			*attack_choose(t_sh *atkr, int *dmg);
 void		ft_putstr(char *str);

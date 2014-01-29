@@ -23,7 +23,7 @@ $(NAME): $(OBJ)
 	@$(CC) $(OBJ) -I $(DIR) -o $(NAME)
 
 %o: %c
-	@$(cc) $(CFLAG) -c -I $(DIR) $< -o $@
+	@$(CC) $(CFLAG) -c -I $(DIR) $< -o $@
 
 clean:
 	@rm -f $(OBJ)
