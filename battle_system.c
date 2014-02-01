@@ -17,10 +17,10 @@ int			*attack_choose(t_sh *atkr, int *dmg)
 			sk = atkr->skill->skC;
 		else if (buf[0] == '4')
 			sk = atkr->skill->skD;
-	}	
+	}
 	dmg[0] = sk->dmg;
 	dmg[1] = sk->mdmg;
-	free(sk);
+	//free(sk);
 	return (dmg);
 }
 
@@ -37,22 +37,22 @@ void		attack_text(t_sh *atkr, t_sh *defr, int hit)
 	ft_putstr("\n\n");
 }
 
-void		attack_turn(t_sh **atkr, t_sh **defr)
+void		attack_turn(t_sh *atkr, t_sh *defr)
 {
 	int		*dmg;
 	int		hit;
 
 	ft_putstr("It's ");
-	ft_putstr((*atkr)->p->name);
+	ft_putstr(atkr->p->name);
 	ft_putstr("'s turn\n");
 	dmg = malloc(sizeof(int) * 2);
-	dmg = attack_choose(*atkr, dmg);
-	hit = atk_dmg(*atkr, *defr, dmg[0]);
-	hit = hit + matk_dmg(*atkr, *defr, dmg[1]);
-	(*defr)->s->hp = (*defr)->s->hp - hit;
-	if ((*defr)->s->hp < 0)
-		(*defr)->s->hp = 0;
-	attack_text(*atkr, *defr, hit);
+	dmg = attack_choose(atkr, dmg);
+	hit = atk_dmg(atkr, defr, dmg[0]);
+	hit = hit + matk_dmg(atkr, defr, dmg[1]);
+	defr->s->hp = defr->s->hp - hit;
+	if (defr->s->hp < 0)
+		defr->s->hp = 0;
+	attack_text(atkr, defr, hit);
 	free(dmg);
 }
 
@@ -79,7 +79,7 @@ int			atk_dmg(t_sh *atkr, t_sh *defr, int base)
 	{
 		dmg = dmg * 2;
 		atkr->stat->crit = 1;
-	}	
+	}
 	return (dmg - red);
 }
 
@@ -101,36 +101,69 @@ void		hp_left(t_sh *p1)
 	ft_putstr(" HP left !\n");
 }
 
-int			main(void)
+void		battle(t_sh *p1, t_sh *p2)
 {
-	t_sh		*p1;
-	t_sh		*p2;
-	t_sklist	*sklist;
-
-	sklist = malloc(sizeof(sklist) * 40);
-	fill_sklist(&sklist);
-	p1 = malloc(sizeof(t_sh));
-	p2 = malloc(sizeof(t_sh));
-	p1 = init_thor(p1, sklist);
-	p2 = init_sylv(p2, sklist);
 	while (p1->s->hp > 0 && p2->s->hp > 0)
 	{
-		attack_turn(&p1, &p2);
+		attack_turn(p1, p2);
 		hp_left(p2);
 		if (p2->s->hp < 1)
 			break ;
-		attack_turn(&p2, &p1);
+		attack_turn(p2, p1);
 		hp_left(p1);
 	}
 	if (p1->s->hp < 1)
 	{
 		ft_putstr(p1->p->name);
-		ft_putstr(" is dead !\n");	
+		ft_putstr(" is dead !\n");
 	}
 	if (p2->s->hp < 1)
 	{
 		ft_putstr(p2->p->name);
-		ft_putstr(" is dead !\n");	
+		ft_putstr(" is dead !\n");
 	}
+}
+
+void		select_chars(t_chars **chars, t_sh **p1, t_sh **p2)
+{
+	*p1 = (*chars)->thor;
+	*p2 = (*chars)->sylvain;
+}
+
+void		init_chars(t_chars *chars, t_sklist *sklist)
+{
+	chars->thor = init_thor(sklist);
+	chars->sylvain = init_sylv(sklist);
+	chars->kwame = init_kwame(sklist);
+	chars->zaz = init_zaz(sklist);
+	chars->florian = init_florian(sklist);
+	chars->benny = init_benny(sklist);
+	chars->ol = init_ol(sklist);
+	chars->beeone = init_beeone(sklist);
+	chars->ns = init_ns(sklist);
+	chars->rainbowdash = init_rainbowdash(sklist);
+}
+
+void		init_game(t_chars **chars, t_sklist **sklist)
+{
+	init_sklist(*sklist);
+	init_chars(*chars, *sklist);
+}
+
+int			main(void)
+{
+	t_sh		*p1;
+	t_sh		*p2;
+	t_sklist	*sklist;
+	t_chars		*chars;
+
+	chars = malloc(sizeof(t_chars));
+	sklist = malloc(sizeof(t_sklist));
+	p1 = malloc(sizeof(t_sh));
+	p2 = malloc(sizeof(t_sh));
+	init_game(&chars, &sklist);
+	select_chars(&chars, &p1, &p2);
+	battle(p1, p2);
+
 	return (0);
 }
