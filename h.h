@@ -193,5 +193,6 @@ t_list		*add_elem(t_list *list, char *str);
 t_list		*ft_list_loop(t_list *list);
 void		print_list(t_list *list);
 int			ft_open(void);
+void		ft_putnbr_fd(int n, int fd);
 
 #endif

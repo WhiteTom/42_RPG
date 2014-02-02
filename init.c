@@ -5,12 +5,10 @@ int			menu_select(t_list *list)
 	char		buf[1];
 
 	buf[0] = 0;
-	tputs(tgoto(tgetstr("cm", NULL), 10, 10), FD, ft_putchar_int);
+	print_list(list);
+//	tputs(tgoto(tgetstr("cm", NULL), 0, 0), FD, ft_putchar_int);
 	while (buf[0] < 49 || buf[0] > 57)
-	{
-		print_list(list);
 		read(0, buf, 1);
-	}
 	return (buf[0]);
 }
 
@@ -46,11 +44,17 @@ void		select_chars(t_chars **chars, t_sh **p1, t_sh **p2)
 	t_list		*list;
 
 	list = list_chars(*chars);
-	ft_putstr("Player 1 : Choose your character\n");
+	ft_putstr("Player 1 : Choose your character\n\n");
 	*p1 = select_p(*chars, list);
-	tputs(tgetstr("cl", NULL), FD, ft_putchar_int);
-	ft_putstr("Player 2 : Choose your character\n");
+	ft_putstr("Player 1 picks ");
+	ft_putstr((*p1)->p->name);
+	ft_putstr("\n******************************\n");
+	ft_putstr("Player 2 : Choose your character\n\n");
 	*p2 = select_p(*chars, list);
+	ft_putstr("Player 2 picks ");
+	ft_putstr((*p2)->p->name);
+	ft_putstr("\n******************************\n");
+//	sleep(3);
 	tputs(tgetstr("cl", NULL), FD, ft_putchar_int);
 }
 
@@ -98,6 +102,7 @@ int			main(void)
 		return (-1);
 	tputs(tgetstr("ti", NULL), FD, ft_putchar_int);
 	tputs(tgetstr("cl", NULL), FD, ft_putchar_int);
+	tputs(tgetstr("vi", NULL), FD, ft_putchar_int);
 	core_wars();
 	tputs(tgetstr("te", NULL), FD, ft_putchar_int);
 	retab(term);
