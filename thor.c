@@ -70,9 +70,9 @@ t_sh		*init_benny(t_sklist *sklist)
 	sh = malloc(sizeof(t_sh));
 	sh->p = malloc(sizeof(t_p));
 	sh->p->name = ft_strdup("Benny");
-	sh->p->cons = 16;
-	sh->p->stre = 17;
-	sh->p->inte = 11;
+	sh->p->cons = 15;
+	sh->p->stre = 15;
+	sh->p->inte = 15;
 	sh->p->agil = 8;
 	sh->p->luck = 8;
 	sh = fill_sec(sh);
