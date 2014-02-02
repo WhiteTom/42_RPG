@@ -194,5 +194,7 @@ t_list		*ft_list_loop(t_list *list);
 void		print_list(t_list *list);
 int			ft_open(void);
 void		ft_putnbr_fd(int n, int fd);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
+void		ft_strclr(char *s);
 
 #endif

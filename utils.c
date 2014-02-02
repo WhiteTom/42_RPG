@@ -7,7 +7,6 @@ void			print_list(t_list *list)
 
 	i = 0;
 	e = list->first;
-//	tputs(tgoto(tgetstr("cm", NULL), 0, 1), FD, ft_putchar_int);
 	while (i++ < 9)
 	{
 		if (e->high == 1)
@@ -20,7 +19,7 @@ void			print_list(t_list *list)
 		tputs(tgetstr("ue", NULL), FD, ft_putchar_int);
 		e = e->next;
 	}
-	ft_putstr("------------------------------\n\n");
+	ft_putstr_fd("------------------------------\n\n", FD);
 }
 
 t_list		*list_loop(t_list *list)

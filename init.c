@@ -7,7 +7,7 @@ int			menu_select(t_list *list)
 	buf[0] = 0;
 	print_list(list);
 //	tputs(tgoto(tgetstr("cm", NULL), 0, 0), FD, ft_putchar_int);
-	while (buf[0] < 49 || buf[0] > 57)
+	while (buf[0] < 48 || buf[0] > 57)
 		read(0, buf, 1);
 	return (buf[0]);
 }
@@ -35,6 +35,8 @@ t_sh		*select_p(t_chars *chars, t_list *list)
 		return (chars->beeone);
 	else if (select == 57)
 		return (chars->ns);
+	else if (select == 48)
+		return (chars->rainbowdash);
 	else
 		return (NULL);
 }
@@ -44,16 +46,23 @@ void		select_chars(t_chars **chars, t_sh **p1, t_sh **p2)
 	t_list		*list;
 
 	list = list_chars(*chars);
-	ft_putstr("Player 1 : Choose your character\n\n");
+	ft_putstr_fd("Player 1 : Choose your character\n\n", FD);
 	*p1 = select_p(*chars, list);
-	ft_putstr("Player 1 picks ");
-	ft_putstr((*p1)->p->name);
-	ft_putstr("\n\n******************************\n\n");
-	ft_putstr("Player 2 : Choose your character\n\n");
+	ft_putstr_fd("Player 1 picks ", FD);
+	ft_putstr_fd((*p1)->p->name, FD);
+	ft_putstr_fd("\n\n******************************\n\n", FD);
+	ft_putstr_fd("Player 2 : Choose your character\n\n", FD);
 	*p2 = select_p(*chars, list);
-	ft_putstr("Player 2 picks ");
-	ft_putstr((*p2)->p->name);
-	ft_putstr("\n******************************\n");
+	while (*p1 == *p2)
+	{
+		tputs(tgetstr("cl", NULL), FD, ft_putchar_int);
+		ft_putstr_fd((*p1)->p->name, FD);
+		ft_putstr_fd(" is already taken, pick someone else !\n\n", FD);
+		*p2 = select_p(*chars, list);
+	}
+	ft_putstr_fd("Player 2 picks ", FD);
+	ft_putstr_fd((*p2)->p->name, FD);
+	ft_putstr_fd("\n******************************\n", FD);
 //	sleep(3);
 	tputs(tgetstr("cl", NULL), FD, ft_putchar_int);
 }

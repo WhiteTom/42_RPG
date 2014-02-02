@@ -5,38 +5,64 @@ void		skills_display(t_sh *atkr)
 {
 	ft_putstr_fd("\n1 - ", FD);
 	ft_putstr_fd(atkr->skill->skA->name, FD);
-//	tputs(tgetstr("ch", NULL), FD, ft_putchar_int);
+	tputs(tgoto(tgetstr("ch", NULL), 0, 28), FD, ft_putchar_int);
 	ft_putstr_fd(" | Damage : ", FD);
 	ft_putnbr_fd(atkr->skill->skA->dmg, FD);
-	ft_putstr_fd(", Magic Damage : ", FD);
+	tputs(tgoto(tgetstr("ch", NULL), 0, 44), FD, ft_putchar_int);
+	ft_putstr_fd("| Magic Damage : ", FD);
 	ft_putnbr_fd(atkr->skill->skA->mdmg, FD);
-	ft_putstr_fd(", AP Cost : ", FD);
+	tputs(tgoto(tgetstr("ch", NULL), 0, 65), FD, ft_putchar_int);
+	ft_putstr_fd("| AP Cost : ", FD);
 	ft_putnbr_fd(atkr->skill->skA->cost, FD);
 	ft_putstr_fd("\n2 - ", FD);
 	ft_putstr_fd(atkr->skill->skB->name, FD);
+	tputs(tgoto(tgetstr("ch", NULL), 0, 28), FD, ft_putchar_int);
 	ft_putstr_fd(" | Damage : ", FD);
 	ft_putnbr_fd(atkr->skill->skB->dmg, FD);
-	ft_putstr_fd(", Magic Damage : ", FD);
+	tputs(tgoto(tgetstr("ch", NULL), 0, 44), FD, ft_putchar_int);
+	ft_putstr_fd("| Magic Damage : ", FD);
 	ft_putnbr_fd(atkr->skill->skB->mdmg, FD);
-	ft_putstr_fd(", AP Cost : ", FD);
+	tputs(tgoto(tgetstr("ch", NULL), 0, 65), FD, ft_putchar_int);
+	ft_putstr_fd("| AP Cost : ", FD);
 	ft_putnbr_fd(atkr->skill->skB->cost, FD);
 	ft_putstr_fd("\n3 - ", FD);
 	ft_putstr_fd(atkr->skill->skC->name, FD);
+	tputs(tgoto(tgetstr("ch", NULL), 0, 28), FD, ft_putchar_int);
 	ft_putstr_fd(" | Damage : ", FD);
 	ft_putnbr_fd(atkr->skill->skC->dmg, FD);
-	ft_putstr_fd(", Magic Damage : ", FD);
+	tputs(tgoto(tgetstr("ch", NULL), 0, 44), FD, ft_putchar_int);
+	ft_putstr_fd("| Magic Damage : ", FD);
 	ft_putnbr_fd(atkr->skill->skC->mdmg, FD);
-	ft_putstr_fd(", AP Cost : ", FD);
+	tputs(tgoto(tgetstr("ch", NULL), 0, 65), FD, ft_putchar_int);
+	ft_putstr_fd("| AP Cost : ", FD);
 	ft_putnbr_fd(atkr->skill->skC->cost, FD);
 	ft_putstr_fd("\n4 - ", FD);
 	ft_putstr_fd(atkr->skill->skD->name, FD);
+	tputs(tgoto(tgetstr("ch", NULL), 0, 28), FD, ft_putchar_int);
 	ft_putstr_fd(" | Damage : ", FD);
 	ft_putnbr_fd(atkr->skill->skD->dmg, FD);
-	ft_putstr_fd(", Magic Damage : ", FD);
+	tputs(tgoto(tgetstr("ch", NULL), 0, 44), FD, ft_putchar_int);
+	ft_putstr_fd("| Magic Damage : ", FD);
 	ft_putnbr_fd(atkr->skill->skD->mdmg, FD);
-	ft_putstr_fd(", AP Cost : ", FD);
+	tputs(tgoto(tgetstr("ch", NULL), 0, 65), FD, ft_putchar_int);
+	ft_putstr_fd("| AP Cost : ", FD);
 	ft_putnbr_fd(atkr->skill->skD->cost, FD);
 	ft_putstr_fd("\n\n", FD);
+}
+
+int			*special_fx(t_sh *atkr, int *dmg, t_sk *sk)
+{
+	if (ft_strncmp("Unleashed", sk->name, 8) == 0)
+		dmg[0] = (atkr->s->hpm - atkr->s->hp) / 2;
+	if (ft_strncmp("Magic shield", sk->name, 11) == 0)
+		atkr->s->hp = atkr->s->hp + 75;
+	if (ft_strncmp("Shield block", sk->name, 11) == 0)
+		atkr->s->hp = atkr->s->hp + 50;
+	if (ft_strncmp("First aid", sk->name, 8) == 0)
+		atkr->s->hp = atkr->s->hp + 75;
+	if (ft_strncmp("Brain Tempest", sk->name, 11) == 0)
+		atkr->s->hp = atkr->s->hp - 200;
+	return (dmg);
 }
 
 int			*attack_choose(t_sh *atkr, int *dmg)
@@ -44,9 +70,11 @@ int			*attack_choose(t_sh *atkr, int *dmg)
 	char	buf[BUFF_SIZE];
 	t_sk	*sk;
 
-	ft_putstr_fd("Choose your attack\n", FD);
+	ft_putstr_fd("\nChoose your attack\n", FD);
 	skills_display(atkr);
-	buf[0] = '\0';
+	ft_strclr(buf);
+	sk = malloc(sizeof(t_sk));
+	sk->cost = 0;
 	while (buf[0] < 48 || buf[0] > 52)
 	{
 		read(0, buf, BUFF_SIZE);
@@ -60,18 +88,21 @@ int			*attack_choose(t_sh *atkr, int *dmg)
 			sk = atkr->skill->skC;
 		else if (buf[0] == '4')
 			sk = atkr->skill->skD;
-		if (atkr->s->ap < sk->cost)
-		{
-			ft_putstr_fd("Not enough AP ! Choose another skill", FD);
-			ft_putstr_fd(" and save AP for next turns !\n", FD);
-			buf[0] = '\0';
-			continue ;
-		}
+			if (atkr->s->ap < sk->cost)
+			{
+				ft_putstr_fd("Not enough AP ! Choose another skill", FD);
+				ft_putstr_fd(" and save AP for next turns !\n", FD);
+				buf[0] = '\0';
+				continue ;
+			}
 	}
 	dmg[0] = sk->dmg;
 	dmg[1] = sk->mdmg;
+	dmg = special_fx(atkr, dmg, sk);
 	atkr->s->ap = atkr->s->ap - sk->cost;
+	tputs(tgetstr("mr", NULL), FD, ft_putchar_int);
 	ft_putstr_fd(sk->name, FD);
+	tputs(tgetstr("me", NULL), FD, ft_putchar_int);
 	ft_putstr_fd(" ! - ", FD);
 	ft_putstr_fd(sk->desc, FD);
 	ft_putstr_fd("\n", FD);
@@ -81,15 +112,15 @@ int			*attack_choose(t_sh *atkr, int *dmg)
 void		attack_text(t_sh *atkr, t_sh *defr, int hit)
 {
 	sleep(1);
-	ft_putstr(atkr->p->name);
-	ft_putstr(" has hit ");
-	ft_putstr(defr->p->name);
-	ft_putstr(" and dealt ");
-	ft_putnbr(hit);
-	ft_putstr(" damage.");
+	ft_putstr_fd(atkr->p->name, FD);
+	ft_putstr_fd(" has hit ", FD);
+	ft_putstr_fd(defr->p->name, FD);
+	ft_putstr_fd(" and dealt ", FD);
+	ft_putnbr_fd(hit, FD);
+	ft_putstr_fd(" damage.", FD);
 	if (atkr->stat->crit == 1)
-		ft_putstr(" (Critical hit !)");
-	ft_putstr("\n\n");
+		ft_putstr_fd(" (Critical hit !)", FD);
+	ft_putstr_fd("\n\n", FD);
 	usleep(300000);
 }
 
@@ -99,8 +130,11 @@ void		attack_turn(t_sh *atkr, t_sh *defr)
 	int		hit;
 
 	ft_putstr_fd("It's ", FD);
+	tputs(tgetstr("us", NULL), FD, ft_putchar_int);
 	ft_putstr_fd(atkr->p->name, FD);
-	ft_putstr_fd("'s turn. ", FD);
+	ft_putstr_fd("'s", FD);
+	tputs(tgetstr("ue", NULL), FD, ft_putchar_int);
+	ft_putstr_fd(" turn. ", FD);
 	tputs(tgetstr("mr", NULL), FD, ft_putchar_int);
 	ft_putstr_fd("HP = ", FD);
 	ft_putnbr_fd(atkr->s->hp, FD);
@@ -163,10 +197,10 @@ int			matk_dmg(t_sh *atkr, t_sh *defr, int base)
 
 void		hp_left(t_sh *p1)
 {
-	ft_putstr((*p1->p).name);
-	ft_putstr(" has ");
-	ft_putnbr((*p1->s).hp);
-	ft_putstr(" HP left !\n\n");
+	ft_putstr_fd((*p1->p).name, FD);
+	ft_putstr_fd(" has ", FD);
+	ft_putnbr_fd((*p1->s).hp, FD);
+	ft_putstr_fd(" HP left !\n\n", FD);
 	sleep(1);
 }
 
@@ -202,17 +236,23 @@ void		battle(t_sh *p1, t_sh *p2)
 	}
 	if (p1->s->hp < 1)
 	{
-		ft_putstr(p1->p->name);
-		ft_putstr(" is dead !\n*****************************\n");
-		ft_putstr(p2->p->name);
-		ft_putstr(" wins !\n");
+		ft_putstr_fd(p1->p->name, FD);
+		ft_putstr_fd(" is dead !\n\n", FD);
+		ft_putstr_fd(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ", FD);
+		ft_putstr_fd(p2->p->name, FD);
+		ft_putstr_fd(" wins !   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n\n", FD);
+		ft_putstr_fd("##############################   Much Might !   ##############################\n", FD);
+		ft_putstr_fd(" ##############################   So Great !   ##############################\n", FD);
 	}
 	if (p2->s->hp < 1)
 	{
-		ft_putstr(p2->p->name);
-		ft_putstr(" is dead !\n*****************************\n");
-		ft_putstr(p1->p->name);
-		ft_putstr(" wins !\n");
+		ft_putstr_fd(p2->p->name, FD);
+		ft_putstr_fd(" is dead !\n\n", FD);
+		ft_putstr_fd(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ", FD);
+		ft_putstr_fd(p1->p->name, FD);
+		ft_putstr_fd(" wins !   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", FD);
+		ft_putstr_fd("##############################   Much Might !   ##############################\n", FD);
+		ft_putstr_fd(" ##############################   So Great !   ##############################\n", FD);
 	}
-	sleep(3);
+	sleep(5);
 }
