@@ -6,7 +6,7 @@
 #    By: thvalnet <thvalnet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/02/02 12:04:59 by thvalnet          #+#    #+#              #
-#    Updated: 2014/02/02 15:06:13 by thvalnet         ###   ########.fr        #
+#    Updated: 2014/02/02 20:49:18 by thvalnet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ fclean: clean exclean
 re: fclean all
 	@echo "$(G)--   Re  done   --$(W)"
 
-nice:
+nice: all clean
 	@echo "$(G)--  Nice  done  --$(W)"
 
 info:
