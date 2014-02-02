@@ -76,11 +76,11 @@ t_sh		*init_sylv(t_sklist *sklist)
 	sh = malloc(sizeof(t_sh));
 	sh->p = malloc(sizeof(t_p));
 	sh->p->name = ft_strdup("Sylvain");
-	sh->p->cons = 10;
+	sh->p->cons = 13;
 	sh->p->stre = 10;
-	sh->p->inte = 10;
-	sh->p->agil = 18;
-	sh->p->luck = 12;
+	sh->p->inte = 12;
+	sh->p->agil = 17;
+	sh->p->luck = 10;
 	sh = fill_sec(sh);
 	sh = fill_skills(sh, 2, sklist);
 	return (sh);

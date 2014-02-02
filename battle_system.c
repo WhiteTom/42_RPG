@@ -53,7 +53,7 @@ void		skills_display(t_sh *atkr)
 int			*special_fx(t_sh *atkr, int *dmg, t_sk *sk)
 {
 	if (ft_strncmp("Unleashed", sk->name, 8) == 0)
-		dmg[0] = (atkr->s->hpm - atkr->s->hp) / 2;
+		dmg[0] = atkr->s->hpm - atkr->s->hp;
 	if (ft_strncmp("Magic shield", sk->name, 11) == 0)
 		atkr->s->hp = atkr->s->hp + 75;
 	if (ft_strncmp("Shield block", sk->name, 11) == 0)
@@ -88,13 +88,13 @@ int			*attack_choose(t_sh *atkr, int *dmg)
 			sk = atkr->skill->skC;
 		else if (buf[0] == '4')
 			sk = atkr->skill->skD;
-			if (atkr->s->ap < sk->cost)
-			{
-				ft_putstr_fd("Not enough AP ! Choose another skill", FD);
-				ft_putstr_fd(" and save AP for next turns !\n", FD);
-				buf[0] = '\0';
-				continue ;
-			}
+		if (atkr->s->ap < sk->cost)
+		{
+			ft_putstr_fd("Not enough AP ! Choose another skill", FD);
+			ft_putstr_fd(" and save AP for next turns !\n", FD);
+			buf[0] = '\0';
+			continue ;
+		}
 	}
 	dmg[0] = sk->dmg;
 	dmg[1] = sk->mdmg;
@@ -233,13 +233,31 @@ void		battle(t_sh *p1, t_sh *p2)
 			break ;
 		attack_turn(p2, p1);
 		hp_left(p1);
-	if (p1->s->hp < 1 && p2->s->hp < 1)
-	{
-		ft_putstr_fd("press Enter to continue", FD);
-		read(0, buf, 1);
-	}
-	//	tputs(tgetstr("cl", NULL), FD, ft_putchar_int);
+		if (p1->s->hp > 1 && p2->s->hp > 1)
+		{
+			ft_putstr_fd("press Enter to continue", FD);
+			read(0, buf, 1);
+		}
+		tputs(tgetstr("cl", NULL), FD, ft_putchar_int);
 		i++;
+	}
+	if ((ft_strncmp(p1->p->name, "Zaz", 2) == 0 && ft_strncmp(p2->p->name, "Rainbowdash", 10) == 0)
+		|| (ft_strncmp(p1->p->name, "Rainbowdash", 10) == 0 && ft_strncmp(p2->p->name, "Zaz", 2) == 0))
+	{
+		ft_putstr_fd("Zaz : I made you ! You can't kill me Rainbow !!\n", FD);
+		sleep(1);
+		ft_putstr_fd("DIE BIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIITCH !!!\n", FD);
+		sleep(3);
+		ft_putstr_fd(">>>>>>>>>>>>>>>>>>>>>>>>>>>> Rainbowdash is dead <<<<<<<<<<<<<<<<<<<<<<<<<<<\n", FD);
+		sleep(1);
+		ft_putstr_fd(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>    Zaz wins !    <<<<<<<<<<<<<<<<<<<<<<<<<<<\n", FD);
+		ft_putstr_fd("##############################   Much Might !   ##############################\n", FD);
+		ft_putstr_fd("##############################    So Great !    ##############################\n", FD);
+		ft_putstr_fd("##############################    Victory  !    ##############################\n", FD);
+		sleep(1);
+		ft_putstr_fd("##############################   End  Credits   ##############################\n", FD);
+		sleep(5);
+		exit(0);
 	}
 	if (p1->s->hp < 1)
 	{
@@ -247,7 +265,7 @@ void		battle(t_sh *p1, t_sh *p2)
 		ft_putstr_fd(" is dead !\n\n", FD);
 		ft_putstr_fd(">>>>>>>>>>>>>>>>>>>>>>>>>>>   ", FD);
 		ft_putstr_fd(p2->p->name, FD);
-		ft_putstr_fd(" wins !   <<<<<<<<<<<<<<<<<<<<<<<<<<<\n\n", FD);
+		ft_putstr_fd(" wins !   <<<<<<<<<<<<<<<<<<<<<<<<<<<\n", FD);
 		ft_putstr_fd("##############################   Much Might !   ##############################\n", FD);
 		ft_putstr_fd(" ##############################   So Great !   ##############################\n", FD);
 	}

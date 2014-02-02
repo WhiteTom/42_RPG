@@ -20,7 +20,7 @@ SRC		+= init.c
 SRC		+= menu_select.c
 SRC		+= utils.c
 
-NAME	= ClusterFighter
+NAME	= corewars
 
 CC		= gcc
 
