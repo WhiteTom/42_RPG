@@ -160,7 +160,7 @@ t_sh		*init_thor(t_sklist *sklist);
 t_sh		*init_sylv(t_sklist *sklist);
 t_sh		*init_kwame(t_sklist *sklist);
 t_sh		*init_zaz(t_sklist *sklist);
-t_sh		*init_florian(t_sklist *sklist);
+t_sh		*init_krp(t_sklist *sklist);
 t_sh		*init_benny(t_sklist *sklist);
 t_sh		*init_ol(t_sklist *sklist);
 t_sh		*init_beeone(t_sklist *sklist);

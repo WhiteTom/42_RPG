@@ -46,13 +46,13 @@ t_sh		*init_zaz(t_sklist *sklist)
 	return (sh);
 }
 
-t_sh		*init_florian(t_sklist *sklist)
+t_sh		*init_krp(t_sklist *sklist)
 {
 	t_sh		*sh;
 
 	sh = malloc(sizeof(t_sh));
 	sh->p = malloc(sizeof(t_p));
-	sh->p->name = ft_strdup("Florian");
+	sh->p->name = ft_strdup("KRP");
 	sh->p->cons = 16;
 	sh->p->stre = 16;
 	sh->p->inte = 12;

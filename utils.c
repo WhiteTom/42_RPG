@@ -20,7 +20,7 @@ void			print_list(t_list *list)
 		tputs(tgetstr("ue", NULL), FD, ft_putchar_int);
 		e = e->next;
 	}
-	ft_putstr("------------------------------\n");
+	ft_putstr("------------------------------\n\n");
 }
 
 t_list		*list_loop(t_list *list)

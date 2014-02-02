@@ -48,7 +48,7 @@ void		select_chars(t_chars **chars, t_sh **p1, t_sh **p2)
 	*p1 = select_p(*chars, list);
 	ft_putstr("Player 1 picks ");
 	ft_putstr((*p1)->p->name);
-	ft_putstr("\n******************************\n");
+	ft_putstr("\n\n******************************\n\n");
 	ft_putstr("Player 2 : Choose your character\n\n");
 	*p2 = select_p(*chars, list);
 	ft_putstr("Player 2 picks ");
@@ -64,7 +64,7 @@ void		init_chars(t_chars *chars, t_sklist *sklist)
 	chars->sylvain = init_sylv(sklist);
 	chars->kwame = init_kwame(sklist);
 	chars->zaz = init_zaz(sklist);
-	chars->florian = init_florian(sklist);
+	chars->florian = init_krp(sklist);
 	chars->benny = init_benny(sklist);
 	chars->ol = init_ol(sklist);
 	chars->beeone = init_beeone(sklist);
