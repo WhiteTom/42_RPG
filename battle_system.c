@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   battle_system.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: thvalnet <thvalnet@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/02/02 20:35:05 by thvalnet          #+#    #+#             */
+/*   Updated: 2014/02/02 20:39:36 by thvalnet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "h.h"
 
@@ -75,12 +86,10 @@ int			*attack_choose(t_sh *atkr, int *dmg)
 	ft_strclr(buf);
 	sk = malloc(sizeof(t_sk));
 	sk->cost = 0;
-	while (buf[0] < 48 || buf[0] > 52)
+	while (buf[0] < 49 || buf[0] > 52)
 	{
 		read(0, buf, BUFF_SIZE);
-		if (buf[0] == '0')
-			exit(0);
-		else if (buf[0] == '1')
+		if (buf[0] == '1')
 			sk = atkr->skill->skA;
 		else if (buf[0] == '2')
 			sk = atkr->skill->skB;
