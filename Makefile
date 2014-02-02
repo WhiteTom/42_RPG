@@ -1,3 +1,14 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: thvalnet <thvalnet@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2014/02/02 12:04:59 by thvalnet          #+#    #+#              #
+#    Updated: 2014/02/02 12:09:21 by thvalnet         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 SRC		+= fill_sec.c
 SRC		+= skill_list.c
@@ -19,33 +30,38 @@ OBJ		= $(SRC:.c=.o)
 
 DIR		= ./
 
+W		= \x1b[0m
+G		= \x1b[33;32m
+R		= \x1b[31;01m
+Y		= \x1b[33;33m
+
 all: $(NAME)
-	@echo "--  All   done  --"
 
 $(NAME): $(OBJ)
 	@$(CC) -ltermcap $(OBJ) -I $(DIR) -o $(NAME)
+	@echo "$(G)--  All   done  --$(W)"
 
 %o: %c
 	@$(CC) $(CFLAG) -c -I $(DIR) $< -o $@
 
 clean:
-	@rm -f $(OBJ)
-	@echo "-- Clean   done --"
+	@/bin/rm -f $(OBJ)
+	@echo "$(G)-- Clean   done --$(W)"
 
 exclean:
-	@rm -f $(NAME)
-	@echo "-- Exclean done --"
+	@/bin/rm -f $(NAME)
+	@echo "$(G)-- Exclean done --$(W)"
 
 fclean: clean exclean
-	@echo "-- Fclean  done --"
+	@echo "$(G)-- Fclean  done --$(W)"
 
 re: fclean all
-	@echo "--   Re  done   --"
+	@echo "$(G)--   Re  done   --$(W)"
 
 nice:
-	@echo "--  Nice  done  --"
+	@echo "$(G)--  Nice  done  --$(W)"
 
 info:
-	@echo "-- insert info here --"
+	@echo "$(G)-- insert info here --$(W)"
 
 .PHONY: all clean exclean fclean re nice info
