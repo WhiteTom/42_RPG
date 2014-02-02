@@ -7,19 +7,20 @@ void			print_list(t_list *list)
 
 	i = 0;
 	e = list->first;
-	tputs(tgoto(tgetstr("cm", NULL), 0, 1), FD, ft_putchar_int);
+//	tputs(tgoto(tgetstr("cm", NULL), 0, 1), FD, ft_putchar_int);
 	while (i++ < 9)
 	{
 		if (e->high == 1)
 			tputs(tgetstr("mr", NULL), FD, ft_putchar_int);
-		if (e->under == 1)
-			tputs(tgetstr("us", NULL), FD, ft_putchar_int);
+		ft_putnbr_fd(i, FD);
+		ft_putstr_fd(" - ", FD);
 		ft_putstr_fd(e->value, FD);
 		ft_putstr_fd("\n", FD);
 		tputs(tgetstr("me", NULL), FD, ft_putchar_int);
 		tputs(tgetstr("ue", NULL), FD, ft_putchar_int);
 		e = e->next;
 	}
+	ft_putstr("------------------------------\n");
 }
 
 t_list		*list_loop(t_list *list)
