@@ -6,7 +6,7 @@
 #    By: thvalnet <thvalnet@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/02/02 12:04:59 by thvalnet          #+#    #+#              #
-#    Updated: 2014/02/02 12:09:21 by thvalnet         ###   ########.fr        #
+#    Updated: 2014/02/02 15:06:13 by thvalnet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC		+= init.c
 SRC		+= menu_select.c
 SRC		+= utils.c
 
-NAME	= coucou
+NAME	= ClusterFighter
 
 CC		= gcc
 
