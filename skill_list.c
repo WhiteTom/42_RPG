@@ -78,23 +78,23 @@ void		init_sklist(t_sklist *sklist)
 	/* Sylvain */
 		sklist->sk05->name = ft_strdup("Smoke bomb");
 	sklist->sk05->desc = ft_strdup("See me ? Now you don't !");
-	sklist->sk05->dmg = 20;
-	sklist->sk05->mdmg = 0;
+	sklist->sk05->dmg = 0;
+	sklist->sk05->mdmg = 50;
 	sklist->sk05->cost = -20;
 		sklist->sk06->name = ft_strdup("TIG");
 	sklist->sk06->desc = ft_strdup("Sylvain caught his ennemy eating in the cluster, TIG");
-	sklist->sk06->dmg = 20;
+	sklist->sk06->dmg = 45;
 	sklist->sk06->mdmg = 0;
 	sklist->sk06->cost = 0;
 		sklist->sk07->name = ft_strdup("Backlash");
 	sklist->sk07->desc = ft_strdup("A nasty attack in ennemy's back");
-	sklist->sk07->dmg = 40;
+	sklist->sk07->dmg = 80;
 	sklist->sk07->mdmg = 0;
 	sklist->sk07->cost = 50;
 		sklist->sk08->name = ft_strdup("Poisoned candies");
 	sklist->sk08->desc = ft_strdup("Who want some candies ? :)");
-	sklist->sk08->dmg = 200;
-	sklist->sk08->mdmg = 400;
+	sklist->sk08->dmg = 100;
+	sklist->sk08->mdmg = 250;
 	sklist->sk08->cost = 320;
 	/* Kwame */
 		sklist->sk09->name = ft_strdup("O-shomen");
@@ -114,9 +114,9 @@ void		init_sklist(t_sklist *sklist)
 	sklist->sk11->cost = 50;
 		sklist->sk12->name = ft_strdup("Tsuki");
 	sklist->sk12->desc = ft_strdup("What did you said ? I can't hear you");
-	sklist->sk12->dmg = 30;
-	sklist->sk12->mdmg = 10;
-	sklist->sk12->cost = 0;
+	sklist->sk12->dmg = 200;
+	sklist->sk12->mdmg = 100;
+	sklist->sk12->cost = 350;
 	/* Zaz */
 		sklist->sk13->name = ft_strdup("Hair strangling!");
 	sklist->sk13->desc = ft_strdup("Zaz strangle the enemy with his hairs");
@@ -125,12 +125,12 @@ void		init_sklist(t_sklist *sklist)
 	sklist->sk13->cost = 750;
 		sklist->sk14->name = ft_strdup("Zaz SMASH");
 	sklist->sk14->desc = ft_strdup("Zaz turns green and tears his clothes appart");
-	sklist->sk14->dmg = 35;
+	sklist->sk14->dmg = 45;
 	sklist->sk14->mdmg = 0;
 	sklist->sk14->cost = 0;
 		sklist->sk15->name = ft_strdup("Slashinyourface");
 	sklist->sk15->desc = ft_strdup("Zaz's lack of techniques can be overcome by pure power !");
-	sklist->sk15->dmg = 55;
+	sklist->sk15->dmg = 80;
 	sklist->sk15->mdmg = 0;
 	sklist->sk15->cost = 60;
 		sklist->sk16->name = ft_strdup("Stack dance");
@@ -162,16 +162,16 @@ void		init_sklist(t_sklist *sklist)
 	/* Benny */
 		sklist->sk21->name = ft_strdup("Poker Trick");
 	sklist->sk21->desc = ft_strdup("oh man i'm in deep sh-BAAAM ROYAL FLUSH !");
-	sklist->sk21->dmg = 35;
-	sklist->sk21->mdmg = 35;
+	sklist->sk21->dmg = 45;
+	sklist->sk21->mdmg = 45;
 	sklist->sk21->cost = 0;
-		sklist->sk22->name = ft_strdup("Popopopopopopopopokerface");
+		sklist->sk22->name = ft_strdup("Popopopopopopopokerface");
 	sklist->sk22->desc = ft_strdup("Benny looks at you in the eyes");
 	sklist->sk22->dmg = 0;
 	sklist->sk22->mdmg = 0;
 	sklist->sk22->cost = -60;
 		sklist->sk23->name = ft_strdup("Ace");
-	sklist->sk23->desc = ft_strdup("This hit could kill 5 enemys on a battlefield");
+	sklist->sk23->desc = ft_strdup("This hit could kill 5 enemies on a battlefield");
 	sklist->sk23->dmg = 150;
 	sklist->sk23->mdmg = 175;
 	sklist->sk23->cost = 300;
@@ -224,8 +224,7 @@ void		init_sklist(t_sklist *sklist)
 	sklist->sk32->cost = 40;
 	/* NS */
 		sklist->sk33->name = ft_strdup("Shield slam");
-	sklist->sk33->desc = ft_strdup("What is a better weapon? The sharp one your enemies expect,
-		 or the blunt one they ignore?");
+	sklist->sk33->desc = ft_strdup("What is a better weapon? The sharp one your enemies expect, or the blunt one they ignore?");
 	sklist->sk33->dmg = 30;
 	sklist->sk33->mdmg = 30;
 	sklist->sk33->cost = 0;
@@ -244,4 +243,25 @@ void		init_sklist(t_sklist *sklist)
 	sklist->sk36->dmg = 25;
 	sklist->sk36->mdmg = 25;
 	sklist->sk36->cost = -20;
+	/* RAINBOW DASH */
+		sklist->sk37->name = ft_strdup("Concentrate");
+	sklist->sk37->desc = ft_strdup("Prismal charge heating process.");
+	sklist->sk37->dmg = 0;
+	sklist->sk37->mdmg = 0;
+	sklist->sk37->cost = -60;
+		sklist->sk38->name = ft_strdup("Evocate");
+	sklist->sk38->desc = ft_strdup("Cooldown system acceleration.");
+	sklist->sk38->dmg = 0;
+	sklist->sk38->mdmg = 0;
+	sklist->sk38->cost = -60;
+		sklist->sk39->name = ft_strdup("Duplicate");
+	sklist->sk39->desc = ft_strdup("Seven colors of death.");
+	sklist->sk39->dmg = 0;
+	sklist->sk39->mdmg = 0;
+	sklist->sk39->cost = -60;
+		sklist->sk40->name = ft_strdup("Rainbow Dash");
+	sklist->sk40->desc = ft_strdup("Now you die. Bitch.");
+	sklist->sk40->dmg = 6666;
+	sklist->sk40->mdmg = 6666;
+	sklist->sk40->cost = 1000;
 }

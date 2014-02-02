@@ -91,7 +91,7 @@ t_sh	*fill_sec(t_sh *sh) // Remplissage auto des caracs secondaires.
 	sh->stat = malloc(sizeof(t_stat));
 	sh->s->hpm = 200 + (30 * sh->p->cons);
 	sh->s->hp = sh->s->hpm;
-	sh->s->apm = 300;
+	sh->s->apm = 200;
 	sh->s->ap = sh->s->apm;
 	sh->s->ddg = 2 * sh->p->agil;
 	sh->s->crt = 2 * sh->p->agil + sh->p->luck;

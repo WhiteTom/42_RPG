@@ -8,11 +8,11 @@ t_sh		*init_rainbowdash(t_sklist *sklist)
 	sh = malloc(sizeof(t_sh));
 	sh->p = malloc(sizeof(t_p));
 	sh->p->name = ft_strdup("Rainbowdash");
-	sh->p->cons = 20;
-	sh->p->stre = 20;
-	sh->p->inte = 20;
-	sh->p->agil = 20;
-	sh->p->luck = 20;
+	sh->p->cons = 30;
+	sh->p->stre = 30;
+	sh->p->inte = 30;
+	sh->p->agil = 0;
+	sh->p->luck = 30;
 	sh = fill_sec(sh);
 	sh = fill_skills(sh, 10, sklist);
 	return (sh);

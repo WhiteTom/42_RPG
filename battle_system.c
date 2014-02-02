@@ -176,6 +176,8 @@ int			atk_dmg(t_sh *atkr, t_sh *defr, int base)
 
 	(*atkr->stat).crit = 0;
 	dmg = (base + (3 * (atkr->p->stre)));
+	if (base == 0)
+		dmg = 0;
 	red = defr->s->def;
 	if (crit_test((*atkr->s).crt) == 1)
 	{
@@ -191,6 +193,8 @@ int			matk_dmg(t_sh *atkr, t_sh *defr, int base)
 	unsigned int	red;
 
 	dmg = (base + (5 * ((*atkr->p).inte)));
+	if (base == 0)
+		dmg = 0;
 	red = defr->s->mdef;
 	return (dmg - red);
 }
@@ -220,7 +224,7 @@ void		battle(t_sh *p1, t_sh *p2)
 	sleep(1);
 	while (p1->s->hp > 0 && p2->s->hp > 0)
 	{
-		ft_putstr_fd("##### Now it's TURN ", FD);
+		ft_putstr_fd("\n##### Now it's TURN ", FD);
 		ft_putnbr_fd(i, FD);
 		ft_putstr_fd(" ! #####\n\n\n", FD);
 		attack_turn(p1, p2);
@@ -229,18 +233,21 @@ void		battle(t_sh *p1, t_sh *p2)
 			break ;
 		attack_turn(p2, p1);
 		hp_left(p1);
+	if (p1->s->hp < 1 && p2->s->hp < 1)
+	{
 		ft_putstr_fd("press Enter to continue", FD);
 		read(0, buf, 1);
-		tputs(tgetstr("cl", NULL), FD, ft_putchar_int);
+	}
+	//	tputs(tgetstr("cl", NULL), FD, ft_putchar_int);
 		i++;
 	}
 	if (p1->s->hp < 1)
 	{
 		ft_putstr_fd(p1->p->name, FD);
 		ft_putstr_fd(" is dead !\n\n", FD);
-		ft_putstr_fd(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ", FD);
+		ft_putstr_fd(">>>>>>>>>>>>>>>>>>>>>>>>>>>   ", FD);
 		ft_putstr_fd(p2->p->name, FD);
-		ft_putstr_fd(" wins !   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n\n", FD);
+		ft_putstr_fd(" wins !   <<<<<<<<<<<<<<<<<<<<<<<<<<<\n\n", FD);
 		ft_putstr_fd("##############################   Much Might !   ##############################\n", FD);
 		ft_putstr_fd(" ##############################   So Great !   ##############################\n", FD);
 	}
@@ -248,9 +255,9 @@ void		battle(t_sh *p1, t_sh *p2)
 	{
 		ft_putstr_fd(p2->p->name, FD);
 		ft_putstr_fd(" is dead !\n\n", FD);
-		ft_putstr_fd(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   ", FD);
+		ft_putstr_fd(">>>>>>>>>>>>>>>>>>>>>>>>>>>   ", FD);
 		ft_putstr_fd(p1->p->name, FD);
-		ft_putstr_fd(" wins !   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", FD);
+		ft_putstr_fd(" wins !   <<<<<<<<<<<<<<<<<<<<<<<<<<<\n", FD);
 		ft_putstr_fd("##############################   Much Might !   ##############################\n", FD);
 		ft_putstr_fd(" ##############################   So Great !   ##############################\n", FD);
 	}
