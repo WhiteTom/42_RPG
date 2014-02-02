@@ -82,14 +82,46 @@ struct	s_skill // Detail des skills
 
 struct	s_skillslist // Liste de stockage des skills
 {
-	t_sk	*sk1;
-	t_sk	*sk2;
-	t_sk	*sk3;
-	t_sk	*sk4;
-	t_sk	*sk5;
-	t_sk	*sk6;
-	t_sk	*sk7;
-	t_sk	*sk8;
+	t_sk	*sk01;
+	t_sk	*sk02;
+	t_sk	*sk03;
+	t_sk	*sk04;
+	t_sk	*sk05;
+	t_sk	*sk06;
+	t_sk	*sk07;
+	t_sk	*sk08;
+	t_sk	*sk09;
+	t_sk	*sk10;
+	t_sk	*sk11;
+	t_sk	*sk12;
+	t_sk	*sk13;
+	t_sk	*sk14;
+	t_sk	*sk15;
+	t_sk	*sk16;
+	t_sk	*sk17;
+	t_sk	*sk18;
+	t_sk	*sk19;
+	t_sk	*sk20;
+	t_sk	*sk21;
+	t_sk	*sk22;
+	t_sk	*sk23;
+	t_sk	*sk24;
+	t_sk	*sk25;
+	t_sk	*sk26;
+	t_sk	*sk27;
+	t_sk	*sk28;
+	t_sk	*sk29;
+	t_sk	*sk30;
+	t_sk	*sk31;
+	t_sk	*sk32;
+	t_sk	*sk33;
+	t_sk	*sk34;
+	t_sk	*sk35;
+	t_sk	*sk36;
+	t_sk	*sk37;
+	t_sk	*sk38;
+	t_sk	*sk39;
+	t_sk	*sk40;
 };
 
 struct	s_characters // Liste des persos
